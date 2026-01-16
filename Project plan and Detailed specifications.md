@@ -1,168 +1,170 @@
-﻿**Project Plan: Bug Tracking Application**
+# Bug Tracking Application — Project Documentation
 
-**Phase 1: Planning & Repository Setup** 
+## Overview
+This Bug Tracking Application is a full-stack web system designed to help student teams report, track, and manage bugs throughout a project's lifecycle.  It supports two roles:
 
-**Objective:** Define scope, architecture, and initialize version control.
+- **Project Manager (PM)** — creates projects, assigns bugs, updates statuses
+- **Tester (TST)** — joins projects and reports bugs
 
-- Create Git Repository.
-- Define Project Specifications.
-- Create Project Plan.
-- Initialize Node.js backend project structure (package.json, folder hierarchy).
-- Initialize React frontend project structure.
+The system includes a **Node.js backend** with a REST API and a **React frontend** that interacts with it.
 
-**Phase 2: Backend Implementation** 
+---
 
-**Objective:** Build a functional RESTful API connected to the database.
+## Technologies Used
 
-**Database & Auth**
+### Backend
+- Node.js (backend server)
+- Express.js (web framework)
+- Sequelize ORM (database management)
+- MariaDB (database)
+- JSON Web Tokens (JWT) (authentication)
+- bcrypt (password hashing)
+- dotenv (environment management)
+- CORS (cross-origin resource sharing)
+- Postman (API testing)
 
-- Setup PostgreSQL database connection.
-- Configure Prisma ORM.
-- Define User and Project models.
-- Implement Registration (with student email validation).
-- Implement Login (JWT generation).
+### Frontend
+- React.js (v19)
+- React Router (v7)
+- Axios (HTTP client)
+- Vite (development environment)
+- HTML5 Canvas API (for real-time animation processing)
+- Vanilla CSS (custom design)
 
-**Core Logic & API**
+### Other
+- Git & GitHub (version control)
 
-- Define Bug model (severity, priority, status, commit links).
-- Implement CRUD endpoints for Projects and Bugs.
-- Implement role-based permissions (PM vs TST).
+---
 
-**Testing & Documentation**
+## Project Structure
+bug-tracker/
+│
+├── backend/
+│   ├── src/
+│   │   ├── models/          # Sequelize models (User, Project, Bug)
+│   │   ├── routes/          # API endpoints
+│   │   ├── controllers/     # Request handlers
+│   │   ├── middleware/      # Auth and role-based access checks
+│   │   ├── config/          # Database connection
+│   │   └── server.js        # Entry point
+│   └── scripts/             # Utility scripts (clear_bugs.js)
+│
+└── bugtracker-frontend/
+    ├── public/
+    │   └── images/          # Bug animation assets
+    ├── src/
+    │   ├── api/             # Axios configuration
+    │   ├── context/         # AuthContext for session management
+    │   ├── components/      # Reusable UI (Layout, CuteBugs)
+    │   ├── pages/           # Application views
+    │   ├── App.jsx          # Routing and protected routes
+    │   └── index.css        # Global "Cute" design system
+    └── main.jsx
 
-- Test endpoints with Postman.
-- Write API documentation (README with usage examples).
+---
 
-**Phase 3: Frontend Implementation** 
+## Phase 1 — Setup & Planning
 
-**Objective:** Develop the User Interface and connect it to the API.
+### Repository Setup
+- Created project directory structure
+- Defined project scope and requirements
+- Planned backend + frontend architecture
 
-**UI Skeleton**
+### Project Initialization
+- Initialized Node.js backend
+- Created Express server structure
+- Initialized React frontend using Vite
 
-- Setup React Router.
-- Create Login/Register pages.
-- Create Dashboard Layout (Projects + Bugs).
+---
 
-**Core UI Features**
+## Phase 2 — Backend Implementation
 
-- Implement Project creation and listing.
-- Implement Bug reporting form.
-- Implement Bug list and detail view.
+### Database & Authentication
+- Configured MariaDB connection using Sequelize
+- Created models:
+  - **User**: Stores credentials and roles (PM/TST).
+  - **Project**: Stores project details and associations.
+  - **Bug**: Stores bug reports associated with projects.
+- Implemented:
+  - Registration with password hashing
+  - Login with JWT token generation
+  - Role-based access control (PM vs TST)
 
-**Advanced Features (Optional)**
+### Core API Logic
+Implemented RESTful endpoints for:
 
-- Add filtering by severity/priority.
-- Add bug assignment and resolution update UI.
-- Improve responsive design for mobile/tablet.
+#### Users
+- Register and Login
 
-**Phase 4: Refinement & Deployment** 
+#### Projects
+- Create project (PM only)
+- Join project (TST via project name)
+- List user-involved projects
 
-**Objective:** Polish the application and deploy to the cloud.
+#### Bugs
+- Create bug (associated with a project)
+- Assign bug (PM assigns to themselves via Bug Title)
+- Update bug status (OPEN, IN PROGRESS, RESOLVED)
+- List bugs (filtered by project involvement)
 
-- Bug Fixing: Ensure all edge cases are handled.
-- Styling: Finalize CSS/Tailwind design for responsiveness.
-- Deployment:
-  - Deploy Database 
-  - Deploy Backend
-  - Deploy Frontend 
-- Demo Prep: Prepare presentation for final laboratory.
+### Testing
+- Verified all endpoints manually and via developer tools
+- Validated authentication flow and protected routes
 
-**Risk Management**
+---
 
-- **Complexity of Permissions:** Role-based logic (PM vs TST) may be tricky. *Mitigation:* Keep permissions simple (PM manages projects and bug statuses, TST reports bugs).
-- **Time Constraints:** Advanced features (filters, responsive UI) may take longer. *Mitigation:* **Focus on core features first, add extras only if time allows.**
+## Phase 3 — Frontend Implementation
 
-**Detailed Specifications: Bug Tracking Application**
+### UI Structure
+- Set up React Router with Protected Routes
+- Developed custom pages for all core flows:
+  - Login and Register 
+  - Dashboard (Interactive grid-based layout)
+  - Project Management (Create/Join/Edit)
+  - Bug Management (Report/Assign/Update)
 
-**1. Project Overview**
+### API Integration
+Configured Axios instance with:
+- Persistent Base URL
+- Automatic JWT Authorization header injection
 
-BugTracker is a web-based application designed to help student teams manage and resolve software bugs collaboratively. It allows project members (PM) to register projects, define repositories and teams, while testers (TST) can join projects and report bugs. Each bug includes severity, priority, description, and commit references. The application focuses on clear communication between team members and a simple workflow for bug assignment and resolution.
+---
 
-**1.1 Target Audience**
+## Phase 4 — Visual Polish & Animations
 
-University students working on software projects who need a centralized platform to track bugs, **assign responsibilities, and monitor resolutions.**
+### Animated Background
+- Created a `CuteBugs` component for floating background animations.
+- Implemented real-time Canvas processing to remove backgrounds and ensure seamless blending with the application gradient.
 
-**2. Architecture & Technologies**
+---
 
-**2.1 High-Level Architecture**
+## Security Measures
+- Passwords hashed using bcrypt.
+- JWT-based session management.
+- Server-side role-based authorization.
+- Input validation and error handling.
+- Secure database connections via Sequelize.
 
-The application follows a standard Single Page Application (SPA) architecture:
+---
 
-- Client: A React.js application running in the browser.
-- Server: A RESTful API built with Node.js..
-- Database: A relational database accessed via an ORM.
-- External Service: Integration with GitHub/GitLab commit links for bug references.
+## Core Features Implemented
 
-**2.2 Technology Stack**
+### Authentication
+- Register/Login with JWT
+- Persistence of session via AuthContext
 
-- Frontend: React.js (component-based framework)
-- Routing: React Router
-- Styling: CSS Modules / Bootstrap / Tailwind CSS
-- Backend: Node.js with Express.js
-- Database: MariaDB
-- ORM: Sequelize
-- Version Control: Git (GitHub)
-- Deployment: Render, Vercel, or Railway 
+### Project Management
+- PMs can create projects and update their metadata.
+- Testers can join projects using a name-based lookup.
 
-**3. Data Model (Relational Schema)**
+### Bug Management
+- Reporting bugs with commit links and severity levels.
+- PMs can assign bugs by Title.
+- Real-time status updates reflecting in the project view.
 
-The application uses a relational database. Below are the core entities:
+### Permissions
+- **PM:** Full project management, assigning bugs, updating project details.
+- **TST:** Project joining, reporting bugs into joined projects.
 
-Users
-
-- id (PK), email (Unique), password\_hash, full\_name, created\_at.
-- Roles: Project Member (PM) or Tester (TST).
-
-Projects
-
-- id (PK), name, description, repository\_url, created\_by (FK → User), created\_at.
-- Relations: team\_members, testers.
-
-Bugs
-
-- id (PK), project\_id (FK), title, description, severity, priority, status, reported\_by (FK → User), assignee (FK → User, nullable), commit\_link, fix\_commit\_link, created\_at, updated\_at.
-
-BugHistory
-
-- id (PK), bug\_id (FK), actor\_user\_id (FK), from\_status, to\_status, note, created\_at.
-
-**4. Functional Requirements**
-
-**4.1 User Authentication & Profile**
-
-- Registration: Users register with a valid email address.
-- Login: Secure login using JWT (JSON Web Tokens).
-- Profile: View and edit basic user details.
-
-**4.2 Project Management**
-
-- Create: PMs can register a project with repository URL and team members.
-- Update: PMs can edit project details.
-- Join: Students outside the team can join as testers (TST).
-
-**4.3 Bug Management**
-
-- Create: TSTs (and PMs optionally) can report bugs with severity, priority, description, and commit link.
-- Read: PMs and TSTs can view bugs for projects they are associated with.
-- Assign: PMs can assign a bug to themselves (only one PM per bug).
-- Update: PMs can update bug status with a fix commit link.
-- Lifecycle: NEW → CONFIRMED → IN\_PROGRESS → RESOLVED → CLOSED/REOPENED.
-
-**4.4 Permissions**
-
-- PMs: Create/modify projects, assign bugs, update bug status.
-- TSTs: Report bugs.
-
-**5. External Service Specification**
-
-- Service: GitHub/GitLab commit links.
-- Purpose: To reference the exact commit where a bug was found or fixed.
-- Data Flow:
-  - User provides commit link → Backend validates format → Stored in database → Displayed in bug details.
-
-**6. Security & Quality Standards**
-
-- Validation: All inputs (email, bug description, commit links) sanitized on the backend.
-- Authentication: Passwords hashed using bcrypt. Routes protected via middleware.
-- Authorization: Role-based access control (PM vs TST).
-- Quality: Code organized with clear naming conventions, incremental commits, and documentation.
+- **PM:** Full project management, assigning bugs, updating project details.
+- **TST:** Project joining, reporting bugs into joined projects.
