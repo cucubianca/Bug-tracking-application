@@ -1,0 +1,415 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #f43f5e;
+  /* Rose */
+  --primary-hover: #e11d48;
+  --secondary: #fb923c;
+  /* Orange */
+  --accent: #2dd4bf;
+  /* Teal */
+  --bg-color: #fff1f2;
+  /* Very light rose bg */
+  --card-bg: #ffffff;
+  --text-main: #4c0519;
+  /* Dark berry text */
+  --text-muted: #9f1239;
+  --border-color: #fecdd3;
+  --success: #10b981;
+  --danger: #ef4444;
+  --radius: 20px;
+  /* Cuter, rounder corners */
+  --shadow: 0 4px 6px -1px rgba(244, 63, 94, 0.1), 0 2px 4px -2px rgba(244, 63, 94, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(244, 63, 94, 0.15), 0 8px 10px -6px rgba(244, 63, 94, 0.1);
+  --shadow-xl: 0 25px 50px -12px rgba(244, 63, 94, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  font-size: 1rem;
+  /* Revert to normal size, user said "too big" */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layout */
+.layout-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #fff1f2 0%, #fff7ed 100%);
+  /* Soft Rose to Orange */
+}
+
+.layout-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 32px;
+  /* Smaller padding */
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 800px;
+  transition: transform 0.2s ease;
+  border: 2px solid #fff;
+  backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 1;
+}
+
+/* Typography */
+h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+  /* Solid cute color */
+}
+
+/* ... (p, a styles kept similar or implied) */
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 0.8rem;
+  /* Smaller */
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+  /* Rose to Orange */
+  color: white;
+  border: none;
+  border-radius: 999px;
+  /* Pill shape is cuter */
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(244, 63, 94, 0.4);
+}
+
+/* Dashboard Interactive Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* Smaller grid items */
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.dashboard-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  padding: 1.5rem;
+  /* Smaller padding */
+  border-radius: var(--radius);
+  text-decoration: none;
+  border: 2px solid theme('colors.rose.100');
+  /* Approximate */
+  box-shadow: var(--shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100px;
+  /* Smaller height */
+  text-align: center;
+}
+
+.dashboard-option:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+  background: #fff0f5;
+  /* Light pink hover */
+}
+
+.dashboard-option span {
+  font-size: 1.1rem;
+  /* Smaller text */
+  font-weight: 700;
+  color: var(--text-main);
+  margin-top: 0.5rem;
+}
+
+.dashboard-option:hover span {
+  color: var(--primary);
+}
+
+p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Forms */
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--text-muted);
+  width: auto;
+  padding: 0;
+  font-weight: 500;
+}
+
+button.secondary:hover {
+  color: var(--primary);
+  background: transparent;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+th {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 2px solid var(--border-color);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Utilities */
+.text-danger {
+  color: var(--danger);
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-OPEN {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-IN_PROGRESS {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-FIXED {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-RESOLVED {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* Tabs */
+/* Tabs */
+.tab-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 12px;
+  background: #ffffff;
+  color: var(--text-muted);
+  /* Softer text */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: #fff1f2;
+  /* Rose tint */
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.tab-button:hover {
+  background: #fff0f5;
+  transform: translateY(-1px);
+}
+
+/* Aesthetics */
+/* ... app-title ... */
+
+.layout-container {
+  background: linear-gradient(135deg, #fff1f2 0%, #fff7ed 100%);
+  /* Soft Rose to Orange */
+}
+
+.layout-card {
+  box-shadow: 0 20px 25px -5px rgba(244, 63, 94, 0.15), 0 8px 10px -6px rgba(244, 63, 94, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+/* Smooth Input Focus */
+input:focus,
+select:focus,
+textarea:focus {
+  transform: translateY(-1px);
+  border-color: var(--primary);
+  box-shadow: 0 4px 6px -1px rgba(244, 63, 94, 0.2), 0 2px 4px -2px rgba(244, 63, 94, 0.1);
+}
+
+/* Cute Bugs Animation */
+.cute-bugs-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  /* Behind content */
+  overflow: hidden;
+}
+
+.cute-bug {
+  position: absolute;
+  bottom: -50px;
+  /* Start below screen */
+  width: 40px;
+  height: 40px;
+  animation: floatUp 15s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    bottom: -50px;
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    bottom: 100%;
+  }
+}
+
+/* Cute Bugs Animation Species */
+.cute-bug img {
+  display: block;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    bottom: -50px;
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    bottom: 100%;
+  }
+}
