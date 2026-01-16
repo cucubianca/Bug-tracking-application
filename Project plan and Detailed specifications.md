@@ -37,6 +37,8 @@ The system includes a **Node.js backend** with a REST API and a **React frontend
 ---
 
 ## Project Structure
+
+```text
 bug-tracker/
 │
 ├── backend/
@@ -60,6 +62,7 @@ bug-tracker/
     │   ├── App.jsx          # Routing and protected routes
     │   └── index.css        # Global "Cute" design system
     └── main.jsx
+```
 
 ---
 
@@ -168,3 +171,4 @@ Configured Axios instance with:
 
 - **PM:** Full project management, assigning bugs, updating project details.
 - **TST:** Project joining, reporting bugs into joined projects.
+
